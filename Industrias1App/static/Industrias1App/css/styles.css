@@ -1,0 +1,150 @@
+html {
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+}
+
+body{
+    margin:0;
+}
+
+header{
+    background-color: steelblue;
+    width:100%;
+}
+
+nav {
+    display: flex;
+    background-color: black;
+}
+
+nav ol{
+    background-color: black;
+    color: white;
+    display:flex;
+    flex-direction: row;
+    list-style: none;
+    margin: auto;
+}
+  
+nav .nav_item {
+    text-decoration: none;
+    padding: 3px 3px;
+    margin: 0px 1px;
+    display: block;
+    color: white;
+}
+  
+nav .nav_item:hover {
+    background-color: white;
+    color:black;
+}
+  
+nav .active {
+    color: steelblue;
+    background-color: gainsboro;
+}
+
+.leyendaLogin{
+    text-align: right; 
+    margin-right: 20px; 
+    display: flex;
+}
+
+.leyendaLogin span{
+    padding: 3px 0px;
+    color:gainsboro;
+}
+
+footer{
+    background-color: darkslategrey;
+    position: fixed;
+    bottom: 0;
+    width:100%;
+}
+
+footer span{
+    color:wheat;
+    padding: 5px 2px;
+    display: block;
+}
+
+.container{
+    display: flex;
+    width:100%;
+    max-width:800px;
+    margin:auto;
+}
+
+.botoneraIzquierda{
+    background-color: white;
+    width: 20%;
+}
+
+.botoneraIzquierda ol{
+    list-style: none;
+    padding:0;
+}
+
+.botoneraIzquierda .nav_item{
+    color: black;
+    text-decoration: none;
+    padding: 2px 2px;
+    display: inline-block;
+}
+
+.botoneraIzquierda .nav_item:hover{
+    color: steelblue
+}
+
+.botoneraIzquierda .active{
+    color: steelblue;
+    font-weight: 800;
+}
+
+.containerCentral{
+    width:90%;
+}
+
+.containerFlex{
+    display:flex;
+    flex-direction: row;
+}
+
+table{
+    border:1px solid blue
+}
+
+td{
+    border:1px solid blue
+}
+caption{
+    border:1px solid blue
+}
+
+#layoutContainer{
+    display:flex;
+    width:100%;
+    justify-content: space-around;
+}
+
+.layoutCard{
+    width:25%;
+    border:1px solid black;
+}
+
+.layoutCard .image{
+    width:100%;
+    margin: auto;
+    background-color: black;
+    color:white;
+    font-weight: 800;
+}
+
+.layoutCard .title{
+    width:100%;
+    margin: auto;
+}
+
+.layoutCard .change{
+    width:100%;
+    font-size:9px;
+}

@@ -1,0 +1,8 @@
+<div class="botoneraIzquierda">
+    <ol>
+        <li><a class="nav_item {% if request.path == '/' %}active{% endif %}" href="{% url 'Home' %}">Bienvenida</a></li>
+        <li><a class="nav_item {% if request.path == '/home/instrucciones' %}active{% endif %}" href="{% url 'Home_instrucciones' %}">Instrucciones</a></li>
+        <li><a class="nav_item {% if request.path == '/home/ranking' %}active{% endif %}" href="{% url 'Home_ranking' %}">Ranking</a></li>
+    </ol>
+    {% include "widgetUsuario/widgetUsuario.html" %}
+</div>

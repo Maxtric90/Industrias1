@@ -1,0 +1,8 @@
+<div class="botoneraIzquierda">
+    <ol>
+        <li><a class="nav_item {% if request.path == '/miplanta/' %}active{% endif %}" href="{% url 'miPlanta:MisEquipos' %}">Mis equipos</a></li>
+        <li><a class="nav_item {% if request.path == '/miplanta/layout' %}active{% endif %}" href="{% url 'miPlanta:Layout' %}">Layout de planta</a></li>
+        <li><a class="nav_item {% if request.path == '/miplanta/materiales' %}active{% endif %}" href="{% url 'miPlanta:Materiales' %}">Materiales</a></li>
+    </ol>
+    {% include "widgetUsuario/widgetUsuario.html" %}
+</div>

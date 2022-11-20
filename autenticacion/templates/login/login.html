@@ -1,0 +1,25 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <form method="POST" action="" style="width:90%; margin:auto;">
+        {% csrf_token %}
+        <p>Introduzca sus credenciales para ingresar al simulador. Estas credenciales deben haber sido provistas por su tutor.</p><br>
+        {{form|crispy}}
+        <div style="width: 75%; color:red; margin: 3px 0px;">
+            {% if messages %}
+                {% for mensaje in messages %}  
+                    <span class="alert alert-{{mensaje.tags}}">{{mensaje}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <button type="submit" class="btn-success">Login</button>
+    </form>
+</div>
+    
+{% endblock %}

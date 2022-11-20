@@ -1,0 +1,6 @@
+<div class="botoneraIzquierda">
+    <ol>
+        <li><a class="nav_item {% if request.path == '/corrida/' %}active{% endif %}" href="{% url 'corrida:Corrida' %}">Corrida</a></li>
+    </ol>
+    {% include "widgetUsuario/widgetUsuario.html" %}
+</div>

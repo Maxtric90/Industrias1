@@ -1,0 +1,104 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierdaCorrida.html" %}
+
+    <div>
+        <h2>Corrida</h2>
+        {% if layouts == None %}
+            <p>Todavía no tiene ningún equipo disponible. Adquiera equipos en la sección "Mercado".</p>
+        {% else %}
+            <p>Estas son las configuraciones de planta de los usuarios:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>Usuario</td>
+                        <td>Material</td>
+                        <td>1er Etapa</td>
+                        <td>2da Etapa</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for layout in layouts %}
+                        <tr>
+                            <td>{{layout.usuario}}</td>
+                            <td>{{layout.material.material.nombre}}</td>
+                            <td>
+                                {% if layout.primerEtapa == None %}
+                                Ninguna
+                                {% else %}
+                                {{layout.primerEtapa.trituradora.modelo}}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if layout.segundaEtapa == None %}
+                                Ninguna
+                                {% else %}
+                                {{layout.segundaEtapa.trituradora.modelo}}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                <input type="submit" value="Ejecutar">
+            </form>
+        {% endif %}
+        <br>
+        {% if detalleVenta != None %}
+            {% for usuario in usuarios %}
+                <h3>{{usuario}}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Material</td>
+                            <td>TamanoDesde</td>
+                            <td>TamanoHasta</td>
+                            <td>Producción</td>
+                            <td>Precio</td>
+                            <td>Ganancia</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for registro in detalleVenta %}
+                            {% if registro.0 == usuario.id %}
+                                <tr>
+                                    <td>{{registro.1}}</td>
+                                    <td>{{registro.2}}"</td>
+                                    <td>{{registro.3}}"</td>
+                                    <td>{{registro.4 | intcomma}}tn</td>
+                                    <td>{{registro.5}}$/tn</td>
+                                    <td>${{registro.6 | intcomma}}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                {% for mensaje in mensajes %}
+                    {% if mensaje.0 == usuario.id %}
+                        <b>{{mensaje.1}}</b><br>
+                    {% endif %}
+                {% endfor %}
+                {% for registro in infoDinero %}
+                    {% if registro.0 == usuario.id %}
+                        Dinero Original: ${{registro.1| intcomma}}<br>
+                        Ganancia: ${{registro.2 | intcomma}}<br>
+                        Dinero Final: ${{registro.3 | intcomma}}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+
+    </div>
+
+{% endblock %}

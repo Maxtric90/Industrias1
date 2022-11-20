@@ -1,0 +1,68 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% if tipo == 'Trituradora' %}
+        {% include "botoneraIzquierda/botoneraIzquierdaMercado.html" %}
+    {% else %}
+        {% include "botoneraIzquierda/botoneraIzquierdaMiPlanta.html" %}
+    {% endif %}
+    
+
+    <div>
+        {% if tipo == 'Trituradora' %}
+            <p>Para la trituradora {{entidad}}:</p>
+        {% else %}
+            <p>Para el material {{entidad}}:</p>
+        {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Tamaño</td>
+                    <td>Porcentaje</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in curvas %}
+                    <tr>
+                        <td>{{registro.tamano}}</td>
+                        <td>{{registro.porcentaje}}%</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <caption>Tabla de tamaños y porcentajes</caption>
+        </table>
+        {% if tipo == 'Trituradora' %}
+            <a href="{% url 'mercado:MercadoTrituradoras' %}">Volver al mercado de equipos</a>
+        {% else %}
+            <a href="{% url 'miPlanta:Materiales' %}">Volver a ver los materiales disponibles</a>
+        {% endif %}
+        
+    </div>
+
+<!--
+    <div class="containerCentral">
+    <h2>Trituradoras</h2>
+        <div class="containerFlex">
+            {% for trituradora in trituradoras %}
+
+                <div class="card" style="width:10rem;margin: 5px 5px; background-color: aqua;">
+                    <div class="card-body" style="text-align:center">
+                        <img src="{{trituradora.imagen.url}}" style="width:90%; border:1px solid black;">
+                        <h4 class="card-title">{{trituradora.tipo.created}}</h4>
+                        <h3 class="card-title">{{trituradora.modelo}}</h3>
+                        <p class="card-text">${{trituradora.precio}}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-success"> Comprar </a>
+                    </div>
+                </div>
+            {% endfor %}
+            {{tutor}}
+        </div>
+    </div>
+-->
+
+{% endblock %}

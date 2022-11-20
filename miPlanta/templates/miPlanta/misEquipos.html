@@ -1,0 +1,40 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierdaMiPlanta.html" %}
+
+    <div>
+    {% if patrimonio == None %}
+        <p>Todavía no tiene ningún equipo disponible. Adquiera equipos en la sección "Mercado".</p>
+    {% else %}
+        <p>Estos son sus equipos:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Tipo</td>
+                    <td>Modelo</td>
+                    <td>Ab. Entrada</td>
+                    <td>Ab. Ciere</td>
+                    <td>Valor</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipo in patrimonio %}
+                    <tr>
+                        <td>{{equipo.trituradora.tipo|title}}</td>
+                        <td>{{equipo.trituradora.modelo}}</td>
+                        <td>{{equipo.trituradora.aberturaEntrada}}"</td>
+                        <td>{{equipo.trituradora.aberturaCierre}}"</td>
+                        <td>${{equipo.trituradora.precio}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierdaMiPlanta.html" %}
+
+    <div>
+        <p>Materiales</p>
+        <table>
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Dureza</td>
+                    <td>Caudal</td>
+                    <td>Curva</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for material in materiales %}
+                    <tr>
+                        <td>{{material.material.nombre|title}}</td>
+                        <td>{{material.material.dureza|title}}</td>
+                        <td>{{material.caudal}} tn/h</td>
+                        <td><a href="{{material.get_absolute_url}}">Link</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% load humanize %}
+<div class="widgetUsuario">
+    {% if request.user.is_authenticated %}
+        <p><b>Usuario: {{request.user}}<br>
+        Dinero: ${{request.user.dinero | intcomma}}<br>
+        Tutor: {{request.user.tutor}}</b></p>
+    {% endif %}
+</div>

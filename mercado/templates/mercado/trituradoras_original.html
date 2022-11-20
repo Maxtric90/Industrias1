@@ -1,0 +1,55 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierdaMercado.html" %}
+    <script>
+        let d="Prueba"
+        const p = document.createElement("p")
+        p.innerText=d
+        document.body.appendChild(p)
+    </script>
+
+    <div>
+        <p>Trituradoras disponibles para la compra:</p>
+        <table>
+            <thead>
+                <tr>
+                    <td>Tipo</td>
+                    <td>Modelo</td>
+                    <td>Ab. Entrada</td>
+                    <td>Ab. Ciere</td>
+                    <td>Precio</td>
+                    <td>Curva</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trituradora in trituradoras %}
+                    <tr>
+                        <td>{{trituradora.tipo|title}}</td>
+                        <td>{{trituradora.modelo}}</td>
+                        <td>{{trituradora.aberturaEntrada}}"</td>
+                        <td>{{trituradora.aberturaCierre}}"</td>
+                        <td>${{trituradora.precio}}</td>
+                        <td><a href="{{trituradora.get_absolute_url}}">Link</a></td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{trituradora.id}}" name="trituradora_id">
+                                <input type="submit" value="Comprar">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if opcionSeleccionada != None %}
+            <p> Adquiriste la trituradora número {{opcionSeleccionada}} </p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

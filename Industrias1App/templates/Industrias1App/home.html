@@ -1,0 +1,26 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierda.html" %}
+
+    <div class="containerCentral">
+        <p>Bienvenido al simulador de industrias 1
+        </p>
+        <p>
+        En el sector izquierdo de la pantalla encontrarás el menú de navegación y tus datos de usuario. Lo más importante: el dinero que disponés en todo momento. Cada usuario empieza la simulación con un valor inicial, que le servirá para comprar equipos de trituración y generar materiales que tengan valor de mercado. El objetivo: maximizar el dinero al finalizar el juego
+        </p>
+        <p>
+        En el submenú "Mi planta" encontrarás toda la información relativa a tu planta: los equipos que adquiriste, los materiales disponibles (vienen por defecto) y el layout de planta. Este layout es importante porque es el que te permitirá ejecutar un proceso de trituración y obtener materiales en formatos más valiosos.
+        </p>
+        <p>
+        Dentro del submenú "Mercado" podrás encontrar la información de demanda (que permite concluir que tamaños y materiales tienen mayor valor de venta), y la opción de comprar equipos. También en el Mercado podrás vender tus materiales, pero cuidado: cuando optes por esto, no habrá marcha atrás y desaparecerán todos los materiales, aunque no tengan valor de mercado.
+        </p>
+        <p>
+        Éxitos!
+        </p>
+    </div>
+    
+{% endblock %}

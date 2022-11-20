@@ -1,0 +1,33 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierdaMercado.html" %}
+
+    <div class="containerCentral">
+    <h2>Tabla de demanda</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td>Material</td>
+                    <td>Tamaño desde</td>
+                    <td>Tamaño hasta</td>
+                    <td>Valor</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in demanda %}
+                    <tr>
+                        <td>{{registro.material|title}}</td>
+                        <td>{{registro.tamanoDesde}}"</td>
+                        <td>{{registro.tamanoHasta}}"</td>
+                        <td>{{registro.precio}}$</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+{% endblock %}

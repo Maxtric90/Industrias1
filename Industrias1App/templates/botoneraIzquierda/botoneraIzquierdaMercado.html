@@ -1,0 +1,7 @@
+<div class="botoneraIzquierda">
+    <ol>
+        <li><a class="nav_item {% if request.path == '/mercado/' %}active{% endif %}" href="{% url 'mercado:MercadoTrituradoras' %}">Comprar equipos</a></li>
+        <li><a class="nav_item {% if request.path == '/mercado/demanda/' %}active{% endif %}" href="{% url 'mercado:Mercado_demanda' %}">Demanda</a></li>
+    </ol>
+    {% include "widgetUsuario/widgetUsuario.html" %}
+</div>

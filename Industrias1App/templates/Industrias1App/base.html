@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'Industrias1App/css/styles.css' %}" rel="stylesheet">
+    <title>Industrias 1: Simulador de planta</title>
+</head>
+<body>
+    <header>
+        <div>Este es el header<br><br></div>
+    </header>
+
+    <nav>
+        <ol>
+            <li><a class="nav_item {% if request.path == '/' or request.path|slice:6 == '/home/' %}active{% endif %}" href="{% url 'Home' %}">Home</a></li>
+            <li><a class="nav_item {% if request.path|slice:10 == '/miplanta/'%}active{% endif %}" href="{% url 'miPlanta:MisEquipos' %}">Mi Planta</a></li>
+            <li><a class="nav_item {% if request.path|slice:9 == '/mercado/'%}active{% endif %}" href="{% url 'mercado:MercadoTrituradoras' %}">Mercado</a></li>
+            {% if user.is_staff %}
+            <li><a class="nav_item {% if request.path|slice:9 == '/corrida/'%}active{% endif %}" href="{% url 'corrida:Corrida' %}">Corrida</a></li>
+            {% endif %}
+        </ol>
+        <div class="leyendaLogin">
+            {% if user.is_authenticated %}
+            <span>Hola <b>{{user.username}}</b>! &nbsp; &nbsp;</span> <a href="{% url 'cerrar_sesion' %}" class="nav_item">Cerrar Sesion</a>
+            {% else %}
+              <a href="{% url 'logear' %}" class="nav_item">Login</a>
+            {% endif %}
+          </div>
+    </nav>
+
+    <div class="container">
+    {% block content %}
+
+    {% endblock %}
+
+    </div>
+
+    <footer><span>Sitio desarrollado por Maximiliano Ortiz para el curso 1 de la materia Industrias 1 de la Universidad de Buenos Aires. 2022</span></footer>
+</body>
+</html>

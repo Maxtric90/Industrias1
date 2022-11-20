@@ -1,0 +1,30 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierda.html" %}
+
+    <div class="containerCentral">
+        <h2>Ranking</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td>Usuario</td>
+                    <td>Dinero</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{usuario}}</td>
+                        <td>${{usuario.dinero | intcomma}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+{% endblock %}

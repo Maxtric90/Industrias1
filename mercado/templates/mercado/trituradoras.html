@@ -1,0 +1,100 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierdaMercado.html" %}
+
+
+    <div>
+        <p>Trituradoras disponibles para la compra:</p>
+
+        <div id="menuTrituradoras">
+
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Tipo</td>
+                    <td>Modelo</td>
+                    <td>Ab. Entrada</td>
+                    <td>Ab. Ciere</td>
+                    <td>Precio</td>
+                    <td>Curva</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trituradora in trituradoras %}
+                    <tr>
+                        <td>{{trituradora.tipo|title}}</td>
+                        <td>{{trituradora.modelo}}</td>
+                        <td>{{trituradora.aberturaEntrada}}"</td>
+                        <td>{{trituradora.aberturaCierre}}"</td>
+                        <td>${{trituradora.precio}}</td>
+                        <td><a href="{{trituradora.get_absolute_url}}">Link</a></td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{trituradora.id}}" name="trituradora_id">
+                                <input type="submit" value="Comprar">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if opcionSeleccionada != None %}
+            <p> Adquiriste la trituradora número {{opcionSeleccionada}} </p>
+        {% endif %}
+
+    </div>
+<!--
+    <script>
+        Array.prototype.unique = function() {
+            let arr = [];
+            for(let i = 0; i < this.length; i++) {
+                if(!arr.includes(this[i])) {
+                    arr.push(this[i]);
+                }
+            }
+            return arr; 
+        }
+
+        const base=[];
+        var tipos=[];
+
+        {% for trituradora in trituradoras %}
+            base.push(['{{trituradora.tipo|title}}', '{{trituradora.modelo}}','{{trituradora.aberturaEntrada}}"','{{trituradora.aberturaCierre}}"','${{trituradora.precio}}','{{trituradora.manto}}'])
+            tipos.push('{{trituradora.tipo|title}}')
+        {% endfor %}
+            tipos=tipos.unique()
+
+        const divMenuTrituradoras=document.getElementById("menuTrituradoras");
+        const selectTrituradora = document.createElement("select");
+        for(let i=0; i < tipos.length; i++){
+            console.log(i)
+            selectTrituradora.innerHTML+=`<option value="${tipos[i]}">${tipos[i]}</option>`
+        }
+        divMenuTrituradoras.appendChild(selectTrituradora)
+
+        const selectModelo = document.createElement("select");
+
+        selectTrituradora.addEventListener('change', (e)=>{
+            console.log(selectTrituradora.value)
+            let modelosCargados=[];
+            selectModelo.innerHTML='';
+            for(let j=0; j < base.length; j++){
+                if(base[j][0]==selectTrituradora.value && !modelosCargados.includes(base[j][1])){
+                    modelosCargados.push(base[j][1])
+                    selectModelo.innerHTML+=`<option value="${base[j][1]}">${base[j][1]}</option>`
+                }
+            }
+            divMenuTrituradoras.appendChild(selectModelo)
+        }
+        )
+    </script>
+-->
+{% endblock %}
