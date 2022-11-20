@@ -7,13 +7,13 @@
     {% include "botoneraIzquierda/botoneraIzquierdaMercado.html" %}
 
     {% if user.is_authenticated %}
-        <div>
+        <div class="containerCentral">
             <p>Trituradoras disponibles para la compra:</p>
 
             <div id="menuTrituradoras">
 
             </div>
-
+            
             <table>
                 <thead>
                     <tr>
@@ -21,6 +21,7 @@
                         <td>Modelo</td>
                         <td>Ab. Entrada</td>
                         <td>Ab. Ciere</td>
+                        <td>Manto</td>
                         <td>Precio</td>
                         <td>Curva</td>
                         <td></td>
@@ -33,6 +34,7 @@
                             <td>{{trituradora.modelo}}</td>
                             <td>{{trituradora.aberturaEntrada}}"</td>
                             <td>{{trituradora.aberturaCierre}}"</td>
+                            <td>{{trituradora.manto}}</td>
                             <td>${{trituradora.precio}}</td>
                             <td><a href="{{trituradora.get_absolute_url}}">Link</a></td>
                             <td>

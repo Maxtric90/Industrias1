@@ -31,6 +31,7 @@ def rango(tamanoMinimo, tamanoMaximo, curva):
 
 def tamanoMaximo(curva):
     for registro in curva:
+        
         if registro.porcentaje==100:
             return registro.tamano
     return None
@@ -63,21 +64,21 @@ def triturar(trituradora_id, patrimonioMaterial_id):
         if patrimonioMaterial_resultante.caudal > trituradora.caudalBlando:
             print("Resultado caudales: ERROR. Se pierde el material")
             #Se pierde el material
-            #patrimonioMaterial_resultante.delete()
+            patrimonioMaterial_resultante.delete()
             return 1 #Devuelve valor bandera de que el tamaño supera el soportado por la trituradora            
     if patrimonioMaterial_resultante.material.dureza=="medio":
         print("Caudal máximo trituradora: ",trituradora.caudalMedio, "tn/h")
         if patrimonioMaterial_resultante.caudal > trituradora.caudalMedio:
             print("Resultado caudales: ERROR. Se pierde el material")
             #Se pierde el material
-            #patrimonioMaterial_resultante.delete()
+            patrimonioMaterial_resultante.delete()
             return 1 #Devuelve valor bandera de que el tamaño supera el soportado por la trituradora            
     if patrimonioMaterial_resultante.material.dureza=="duro":
         print("Caudal máximo trituradora: ",trituradora.caudalDuro, "tn/h")
         if patrimonioMaterial_resultante.caudal > trituradora.caudalDuro:
             print("Resultado caudales: ERROR. Se pierde el material")
             #Se pierde el material
-            #patrimonioMaterial_resultante.delete()
+            patrimonioMaterial_resultante.delete()
             return 1 #Devuelve valor bandera de que el tamaño supera el soportado por la trituradora            
     print("Resultado caudales: OK")
 
@@ -99,7 +100,11 @@ def triturar(trituradora_id, patrimonioMaterial_id):
     return 0 #Devuelve señal de que la trituración fue correcta
 
 def ejecutarLayout(usuario_id):
-    layout=Layout.objects.get(usuario_id=usuario_id)
+    layout=list(Layout.objects.filter(usuario_id=usuario_id))
+    if layout == []:
+        return 1
+    else:
+        layout=layout[0]
     print("******Layout******")
     print("Material: ", layout.material)
     print("Primer Etapa: ", layout.primerEtapa)
@@ -125,20 +130,20 @@ def ventaMaterial(usuario_id):
     jornadas=20 #Esto debería ser una variable de Settings
     detalleVenta=[]
     for activo in patrimonioMateriales:
-        curva=list(CurvaGranulometricaMaterial.objects.filter(material_id=activo.id))
+        curva=list(CurvaGranulometricaMaterial.objects.filter(material_id=activo.id).order_by('tamano'))
         demanda=list(Demanda.objects.filter(material_id=activo.material.id))
         print("Para el material ", activo.id,"(", activo.material.nombre,") con caudal ", activo.caudal)
         for registro in curva:
             print("Tamano: ", registro.tamano, " :", registro.porcentaje)
         for escala in demanda:
-                print("El porcentaje entre ", escala.tamanoDesde, " y ", escala.tamanoHasta, " es ", rango(escala.tamanoDesde, escala.tamanoHasta,curva))
+                print("El porcentaje entre ", escala.tamanoDesde, " y ", escala.tamanoHasta, " es ", rango(escala.tamanoDesde, escala.tamanoHasta,curva)*100, "%.")
                 caudal_escala=round(activo.caudal*rango(escala.tamanoDesde, escala.tamanoHasta,curva)*jornadas*jornadaHoras,2)
                 ganancia=caudal_escala*escala.precio
                 print("La ganacia es $", ganancia)
                 gananciaTotal+=ganancia
                 detalleVenta.append([usuario_id, activo.material.nombre,escala.tamanoDesde,escala.tamanoHasta,caudal_escala,escala.precio,round(ganancia)])
-        #Eliminar material de Patrimonio del usuario
-        #activo.delete()
+        #Eliminar material de Patrimonio del usuario porque ya se consumió
+        activo.delete()
     #Incorporamos la ganancia en el usuario
     usuario=CustomUser.objects.get(id=usuario_id)
     usuario.dinero+= gananciaTotal
@@ -170,3 +175,24 @@ def lecturaTrituradoras():
                 print("********Fin agregado de curvas********")
                 
     print("********Fin agregado de trituradoras********")
+
+def AgregarMaterial():
+    usuarios=CustomUser.objects.all()
+    materiales=Material.objects.all()
+    caudal=20
+    tamano=15
+    print("hola")
+    for usuario in usuarios:
+        for material in materiales:
+            patrimonioMaterial=PatrimonioMateriales(usuario=usuario, material=material, caudal=caudal)
+            patrimonioMaterial.save()
+            curvaMaterialMax=CurvaGranulometricaMaterial(tamano=tamano, porcentaje=100, material=patrimonioMaterial)
+            curvaMaterialAux=CurvaGranulometricaMaterial(tamano=tamano-0.01, porcentaje=0.1, material=patrimonioMaterial)
+            curvaMaterialMax.save()
+            curvaMaterialAux.save()
+            if list(Layout.objects.filter(usuario_id=usuario.id)) ==[]:
+                layout=Layout(usuario=usuario, material=patrimonioMaterial)
+                layout.save()
+            else:
+                Layout.objects.filter(usuario_id=usuario.id).update(material=patrimonioMaterial)
+

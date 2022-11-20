@@ -43,9 +43,11 @@ def layout(request):
                         layoutAAgregar=Layout(usuario_id=currentUser.id, material=materialInput, primerEtapa=primerEtapaInput, segundaEtapa=segundaEtapaInput)
                         layoutAAgregar.save()
                     mensaje='Layout actualizado con éxito!'
-                    
-        layout=list(Layout.objects.filter(usuario_id=currentUser.id))[0]
-        print(layout)
+
+        if list(Layout.objects.filter(usuario_id=currentUser.id))==[]:                 
+            layout=None
+        else:
+            layout=list(Layout.objects.filter(usuario_id=currentUser.id))[0]
         materiales=list(PatrimonioMateriales.objects.filter(usuario_id=currentUser.id))
         trituradoras=list(Patrimonio.objects.filter(usuario_id=currentUser.id))
         if not layout:
@@ -62,7 +64,6 @@ def materiales(request):
     if request.user.is_authenticated:
         currentUser=request.user
         materiales=list(PatrimonioMateriales.objects.filter(usuario_id=currentUser.id))
-        print(materiales[0].material.nombre)
         if not materiales:
             materiales=None
     else:
