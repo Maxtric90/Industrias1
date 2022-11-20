@@ -52,6 +52,9 @@ def layout(request):
             layout=None
     else:
         layout=None
+        materiales=None
+        trituradoras=None
+        mensaje=None
 
     return render(request, "miPlanta/layout.html", {'layout': layout,'materiales': materiales, 'trituradoras': trituradoras, 'mensaje':mensaje})
 
