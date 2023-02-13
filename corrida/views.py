@@ -38,11 +38,11 @@ def corrida(request):
     return render(request, "corrida/corrida.html", {'layouts': layouts,'detalleVenta':detalleVenta, 'usuarios': usuarios,'infoDinero': infoDinero, 'mensajes': mensajes})
 
 def configuracion(request):
-    patrimonioMateriales=list(PatrimonioMateriales.objects.all())
     materiales=list(Material.objects.all())
     if request.method=="POST":
         materialInput=get_object_or_404(Material, id=request.POST.get('materialInput'))
         caudalInput=int(request.POST.get('materialCaudal'))
         tamanoInput=int(request.POST.get('materialTamano'))
         agregarMaterialMenu(materialInput, caudalInput, tamanoInput)
+    patrimonioMateriales=list(PatrimonioMateriales.objects.all())
     return render(request, "configuracion/configuracion.html", {'patrimonioMateriales': patrimonioMateriales, 'materiales': materiales})
