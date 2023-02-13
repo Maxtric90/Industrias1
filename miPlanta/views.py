@@ -19,30 +19,34 @@ def layout(request):
         currentUser=request.user
         mensaje=None
         if request.method=="POST":
-            materialInput=get_object_or_404(PatrimonioMateriales, id=request.POST.get('materialInput'))
-            if request.POST.get('primerEtapaInput')!='0':
-                primerEtapaInput=get_object_or_404(Patrimonio, id=request.POST.get('primerEtapaInput'))
-            else:
-                primerEtapaInput=None
-            if request.POST.get('segundaEtapaInput')!='0':
-                segundaEtapaInput=get_object_or_404(Patrimonio, id=request.POST.get('segundaEtapaInput'))
-            else:
-                segundaEtapaInput=None    
             
-            #Control de que no se usa dos veces la misma trituradora
-            if primerEtapaInput == segundaEtapaInput and primerEtapaInput != None:
-                mensaje='No puede utilizar la misma trituradora en dos etapas.'
+            if request.POST.get('materialInput') == None:
+                mensaje='Debe seleccionar un material'
             else:
-                #Control de que no haya primera etapa y si haya segunda etapa
-                if primerEtapaInput == None and segundaEtapaInput != None:
-                    mensaje='No se puede colocar segunda etapa de trituración sin primera etapa de trituración'
+                materialInput=get_object_or_404(PatrimonioMateriales, id=request.POST.get('materialInput'))
+                if request.POST.get('primerEtapaInput')!='0':
+                    primerEtapaInput=get_object_or_404(Patrimonio, id=request.POST.get('primerEtapaInput'))
                 else:
-                    if list(Layout.objects.filter(usuario_id=currentUser.id)):
-                        Layout.objects.filter(usuario_id=currentUser.id).update(material=materialInput, primerEtapa=primerEtapaInput, segundaEtapa=segundaEtapaInput)
+                    primerEtapaInput=None
+                if request.POST.get('segundaEtapaInput')!='0':
+                    segundaEtapaInput=get_object_or_404(Patrimonio, id=request.POST.get('segundaEtapaInput'))
+                else:
+                    segundaEtapaInput=None    
+                
+                #Control de que no se usa dos veces la misma trituradora
+                if primerEtapaInput == segundaEtapaInput and primerEtapaInput != None:
+                    mensaje='No puede utilizar la misma trituradora en dos etapas.'
+                else:
+                    #Control de que no haya primera etapa y si haya segunda etapa
+                    if primerEtapaInput == None and segundaEtapaInput != None:
+                        mensaje='No se puede colocar segunda etapa de trituración sin primera etapa de trituración'
                     else:
-                        layoutAAgregar=Layout(usuario_id=currentUser.id, material=materialInput, primerEtapa=primerEtapaInput, segundaEtapa=segundaEtapaInput)
-                        layoutAAgregar.save()
-                    mensaje='Layout actualizado con éxito!'
+                        if list(Layout.objects.filter(usuario_id=currentUser.id)):
+                            Layout.objects.filter(usuario_id=currentUser.id).update(material=materialInput, primerEtapa=primerEtapaInput, segundaEtapa=segundaEtapaInput)
+                        else:
+                            layoutAAgregar=Layout(usuario_id=currentUser.id, material=materialInput, primerEtapa=primerEtapaInput, segundaEtapa=segundaEtapaInput)
+                            layoutAAgregar.save()
+                        mensaje='Layout actualizado con éxito!'
 
         if list(Layout.objects.filter(usuario_id=currentUser.id))==[]:                 
             layout=None

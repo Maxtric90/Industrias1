@@ -1,0 +1,56 @@
+{% extends 'Industrias1App/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+    {% include "botoneraIzquierda/botoneraIzquierdaCorrida.html" %}
+
+    <div>
+        <h2>Configuración</h2>
+        {% if patrimonioMateriales == None %}
+            <p>No existen patrimonios de materiales configurados.</p>
+        {% else %}
+            <p>Estos son los materiales que disponen los usuarios:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Usuario</td>
+                        <td>Material</td>
+                        <td>Caudal</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for material in patrimonioMateriales %}
+                        <tr>
+                            <td>{{material.usuario}}</td>
+                            <td>{{material.material.nombre}}</td>
+                            <td>{{material.caudal}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <h2>Asignar materiales</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            Material:
+            <select name="materialInput">
+                {% for material in materiales %}
+                <option value="{{material.id}}">{{material.nombre}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            Caudal:
+            <input name="materialCaudal" type="number"><br>
+            Tamaño:
+            <input name="materialTamano" type="number">
+            <br>
+            <input type="submit" value="Incorporar materiales">
+        </form>
+    </div>
+
+{% endblock %}

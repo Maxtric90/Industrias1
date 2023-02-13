@@ -176,12 +176,12 @@ def lecturaTrituradoras():
                 
     print("********Fin agregado de trituradoras********")
 
+#Esta función es para agregar materiales a los usuarios manualmente pero ya se realiza desde menú
 def AgregarMaterial():
     usuarios=CustomUser.objects.all()
     materiales=Material.objects.all()
     caudal=20
     tamano=15
-    print("hola")
     for usuario in usuarios:
         for material in materiales:
             patrimonioMaterial=PatrimonioMateriales(usuario=usuario, material=material, caudal=caudal)
@@ -196,3 +196,17 @@ def AgregarMaterial():
             else:
                 Layout.objects.filter(usuario_id=usuario.id).update(material=patrimonioMaterial)
 
+def agregarMaterialMenu(material, caudal, tamano):
+    usuarios=CustomUser.objects.all()
+    for usuario in usuarios:
+        patrimonioMaterial=PatrimonioMateriales(usuario=usuario, material=material, caudal=caudal)
+        patrimonioMaterial.save()
+        curvaMaterialMax=CurvaGranulometricaMaterial(tamano=tamano, porcentaje=100, material=patrimonioMaterial)
+        curvaMaterialAux=CurvaGranulometricaMaterial(tamano=tamano-0.01, porcentaje=0.1, material=patrimonioMaterial)
+        curvaMaterialMax.save()
+        curvaMaterialAux.save()
+        if list(Layout.objects.filter(usuario_id=usuario.id)) ==[]:
+            layout=Layout(usuario=usuario, material=patrimonioMaterial)
+            layout.save()
+        else:
+            Layout.objects.filter(usuario_id=usuario.id).update(material=patrimonioMaterial)

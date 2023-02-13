@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from Industrias1App.models import CustomUser
-from mercado.models import Layout
-from corrida.ejecucion import ejecutarLayout, ventaMaterial
+from mercado.models import Layout, PatrimonioMateriales, Material
+from corrida.ejecucion import ejecutarLayout, ventaMaterial, agregarMaterialMenu
 
 # Create your views here.
 def corrida(request):
@@ -36,3 +36,13 @@ def corrida(request):
             infoDinero.append([usuario.id,dineroOriginal,ganancia,dineroOriginal+ganancia])
 
     return render(request, "corrida/corrida.html", {'layouts': layouts,'detalleVenta':detalleVenta, 'usuarios': usuarios,'infoDinero': infoDinero, 'mensajes': mensajes})
+
+def configuracion(request):
+    patrimonioMateriales=list(PatrimonioMateriales.objects.all())
+    materiales=list(Material.objects.all())
+    if request.method=="POST":
+        materialInput=get_object_or_404(Material, id=request.POST.get('materialInput'))
+        caudalInput=int(request.POST.get('materialCaudal'))
+        tamanoInput=int(request.POST.get('materialTamano'))
+        agregarMaterialMenu(materialInput, caudalInput, tamanoInput)
+    return render(request, "configuracion/configuracion.html", {'patrimonioMateriales': patrimonioMateriales, 'materiales': materiales})
