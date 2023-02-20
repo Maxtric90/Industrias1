@@ -19,8 +19,9 @@
                         <td>Tipo</td>
                         <td>Modelo</td>
                         <td>Ab. Entrada</td>
-                        <td>Ab. Ciere</td>
-                        <td>Valor</td>
+                        <td>Ab. Cierre</td>
+                        <td>Valor Original</td>
+                        <td>Valor Actual</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                             <td>{{equipo.trituradora.aberturaEntrada}}"</td>
                             <td>{{equipo.trituradora.aberturaCierre}}"</td>
                             <td>${{equipo.trituradora.precio}}</td>
+                            <td>${{equipo.valorActual}}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

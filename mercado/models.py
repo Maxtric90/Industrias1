@@ -82,6 +82,7 @@ class CurvaGranulometricaMaterial(models.Model):
 class Patrimonio(models.Model):
     usuario=models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     trituradora=models.ForeignKey(Trituradora, on_delete=models.CASCADE)
+    valorActual=models.FloatField()
 
     def __str__(self):
         return "{} - {} - Manto; {}".format(self.usuario.username, self.trituradora, self.trituradora.manto)

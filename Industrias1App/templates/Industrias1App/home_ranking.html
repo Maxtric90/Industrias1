@@ -14,13 +14,17 @@
                 <tr>
                     <td>Usuario</td>
                     <td>Dinero</td>
+                    <td>Valor Equipos</td>
+                    <td>Total</td>
                 </tr>
             </thead>
             <tbody>
-                {% for usuario in usuarios %}
+                {% for registro in tabla %}
                     <tr>
-                        <td>{{usuario}}</td>
-                        <td>${{usuario.dinero | intcomma}}</td>
+                        <td>{{registro.usuario}}</td>
+                        <td>${{registro.dinero | intcomma}}</td>
+                        <td>${{registro.valorEquipos | intcomma}}</td>
+                        <td>${{registro.dinero|add:registro.valorEquipos | intcomma}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

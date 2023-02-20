@@ -22,8 +22,7 @@ def mercadoTrituradoras(request):
         opcionSeleccionada=request.POST.get('trituradora_id')
         trituradoraComprada=get_object_or_404(Trituradora, id=opcionSeleccionada)
         if request.user.dinero >= trituradoraComprada.precio:
-            print("paso por aca")
-            patrimonio = Patrimonio.objects.create(usuario=request.user, trituradora=trituradoraComprada)
+            patrimonio = Patrimonio.objects.create(usuario=request.user, trituradora=trituradoraComprada, valorActual=trituradoraComprada.precio)
             patrimonio.save()
             usuario=request.user
             usuario.dinero=usuario.dinero-trituradoraComprada.precio
