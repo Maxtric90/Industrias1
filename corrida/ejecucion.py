@@ -1,6 +1,7 @@
 from mercado.models import CurvaGranulometricaMaterial, Demanda, Patrimonio, PatrimonioMateriales, Trituradora, CurvaGranulometrica, Material, Layout
 from Industrias1App.models import CustomUser
 from django.shortcuts import render, get_object_or_404, get_list_or_404
+from datetime import date
 import csv
 
 #Esta función devuelve el porcentaje del material de una curva que es menor al tamaño indicado
@@ -45,42 +46,42 @@ def triturar(trituradora_id, patrimonioMaterial_id):
     curvaMaterial=list(CurvaGranulometricaMaterial.objects.filter(material_id=patrimonioMaterial_id))
 
 # Control de que tamaño máximo del material sea menor que abertura de entrada de trituradora
-    print("******Control tamaños******")
-    print("Tamaño ingreso material: ",tamanoMaximo(curvaMaterial))
-    print("Tamaño entrada trituradora: ",trituradora.aberturaEntrada)
+    escrituraArchivo("******Control tamaños******", 'log')
+    escrituraArchivo("Tamaño ingreso material: "+ str(tamanoMaximo(curvaMaterial)), 'log')
+    escrituraArchivo("Tamaño entrada trituradora: "+ str(trituradora.aberturaEntrada), 'log')
     if tamanoMaximo(curvaMaterial) > float(trituradora.aberturaEntrada):
-        print("Resultado tamaños: ERROR. Se pierde el material")
+        escrituraArchivo("Resultado tamaños: ERROR. Se pierde el material", 'log')
         #Se pierde el material
         #patrimonioMaterial_resultante.delete()
         return 1 #Devuelve valor bandera de que el tamaño supera el soportado por la trituradora 
-    print("Resultado tamaños: OK")
+    escrituraArchivo("Resultado tamaños: OK", 'log')
 
 # Control de que el caudal del material sea menor que el material de la trituradora
-    print("******Control caudales******")
-    print("Caudal ingreso material: ",patrimonioMaterial_resultante.caudal, "tn/h")
-    print("Dureza: ",patrimonioMaterial_resultante.material.dureza)
+    escrituraArchivo("******Control caudales******", 'log')
+    escrituraArchivo("Caudal ingreso material: " + str(patrimonioMaterial_resultante.caudal) + "tn/h", 'log')
+    escrituraArchivo("Dureza: " + str(patrimonioMaterial_resultante.material.dureza), 'log')
     if patrimonioMaterial_resultante.material.dureza=="blando":
-        print("Caudal máximo trituradora: ",trituradora.caudalBlando, "tn/h")
+        escrituraArchivo("Caudal máximo trituradora: " + str(trituradora.caudalBlando) + "tn/h", 'log')
         if patrimonioMaterial_resultante.caudal > trituradora.caudalBlando:
-            print("Resultado caudales: ERROR. Se pierde el material")
+            escrituraArchivo("Resultado caudales: ERROR. Se pierde el material", 'log')
             #Se pierde el material
             patrimonioMaterial_resultante.delete()
             return 1 #Devuelve valor bandera de que el tamaño supera el soportado por la trituradora            
     if patrimonioMaterial_resultante.material.dureza=="medio":
-        print("Caudal máximo trituradora: ",trituradora.caudalMedio, "tn/h")
+        escrituraArchivo("Caudal máximo trituradora: " + str(trituradora.caudalMedio) + "tn/h", 'log')
         if patrimonioMaterial_resultante.caudal > trituradora.caudalMedio:
-            print("Resultado caudales: ERROR. Se pierde el material")
+            escrituraArchivo("Resultado caudales: ERROR. Se pierde el material", 'log')
             #Se pierde el material
             patrimonioMaterial_resultante.delete()
             return 1 #Devuelve valor bandera de que el tamaño supera el soportado por la trituradora            
     if patrimonioMaterial_resultante.material.dureza=="duro":
-        print("Caudal máximo trituradora: ",trituradora.caudalDuro, "tn/h")
+        escrituraArchivo("Caudal máximo trituradora: " + str(trituradora.caudalDuro) + "tn/h", 'log')
         if patrimonioMaterial_resultante.caudal > trituradora.caudalDuro:
-            print("Resultado caudales: ERROR. Se pierde el material")
+            escrituraArchivo("Resultado caudales: ERROR. Se pierde el material", 'log')
             #Se pierde el material
             patrimonioMaterial_resultante.delete()
             return 1 #Devuelve valor bandera de que el tamaño supera el soportado por la trituradora            
-    print("Resultado caudales: OK")
+    escrituraArchivo("Resultado caudales: OK", 'log')
 
 # Crea curvas para material nueva con idénticos parámetros que curva de trituradora
     #Elimina la curva original
@@ -105,22 +106,22 @@ def ejecutarLayout(usuario_id):
         return 1
     else:
         layout=layout[0]
-    print("******Layout******")
-    print("Material: ", layout.material)
-    print("Primer Etapa: ", layout.primerEtapa)
-    print("Segunda Etapa: ", layout.segundaEtapa)
-    print("******************")
+    escrituraArchivo("******Layout******", 'log')
+    escrituraArchivo("Material: " + str(layout.material), 'log')
+    escrituraArchivo("Primer Etapa: " + str(layout.primerEtapa), 'log')
+    escrituraArchivo("Segunda Etapa: " + str(layout.segundaEtapa), 'log')
+    escrituraArchivo("******************", 'log')
     if(layout.primerEtapa != None):
-        print("******Inicio trituración Etapa 1******")
+        escrituraArchivo("******Inicio trituración Etapa 1******", 'log')
         if triturar(layout.primerEtapa.trituradora.id,layout.material.id) == 0:
-            print("******Fin trituración Etapa 1******")
+            escrituraArchivo("******Fin trituración Etapa 1******", 'log')
             if(layout.segundaEtapa!=None):
-                print("******Inicio trituración Etapa 2******")
+                escrituraArchivo("******Inicio trituración Etapa 2******", 'log')
                 return triturar(layout.segundaEtapa.trituradora.id,layout.material.id)
             else:
                 return 0
         else:
-            print("******Fin trituración Etapa 1******")
+            escrituraArchivo("******Fin trituración Etapa 1******", 'log')
             return 1
 
 def ventaMaterial(usuario_id):
@@ -132,14 +133,14 @@ def ventaMaterial(usuario_id):
     for activo in patrimonioMateriales:
         curva=list(CurvaGranulometricaMaterial.objects.filter(material_id=activo.id).order_by('tamano'))
         demanda=list(Demanda.objects.filter(material_id=activo.material.id))
-        print("Para el material ", activo.id,"(", activo.material.nombre,") con caudal ", activo.caudal)
+        escrituraArchivo("Para el material " +  str(activo.id) + "(" + str(activo.material.nombre) +") con caudal " + str(activo.caudal), 'log')
         for registro in curva:
-            print("Tamano: ", registro.tamano, " :", registro.porcentaje)
+            escrituraArchivo("Tamano: " + str(registro.tamano)+ " :"+ str(registro.porcentaje), 'log')
         for escala in demanda:
-                print("El porcentaje entre ", escala.tamanoDesde, " y ", escala.tamanoHasta, " es ", rango(escala.tamanoDesde, escala.tamanoHasta,curva)*100, "%.")
+                escrituraArchivo("El porcentaje entre " +str(escala.tamanoDesde)+ " y "+ str(escala.tamanoHasta)+ " es " + str(rango(escala.tamanoDesde, escala.tamanoHasta,curva)*100)+ "%.", 'log')
                 caudal_escala=round(activo.caudal*rango(escala.tamanoDesde, escala.tamanoHasta,curva)*jornadas*jornadaHoras,2)
                 ganancia=caudal_escala*escala.precio
-                print("La ganacia es $", ganancia)
+                escrituraArchivo("La ganacia es $" + str(ganancia), 'log')
                 gananciaTotal+=ganancia
                 detalleVenta.append([usuario_id, activo.material.nombre,escala.tamanoDesde,escala.tamanoHasta,caudal_escala,escala.precio,round(ganancia)])
         #Eliminar material de Patrimonio del usuario porque ya se consumió
@@ -210,3 +211,11 @@ def agregarMaterialMenu(material, caudal, tamano):
             layout.save()
         else:
             Layout.objects.filter(usuario_id=usuario.id).update(material=patrimonioMaterial)
+
+def escrituraArchivo(texto, tipo):
+    today = date.today()
+    rutaArchivo= 'corrida/logs/'+ tipo + str(today.year) + str(today.month).zfill(2) + str(today.day).zfill(2) + '.txt'
+    with open(rutaArchivo, 'a') as f:
+        print(texto)
+        f.write(texto)
+        f.write('\n')

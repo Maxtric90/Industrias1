@@ -3,6 +3,16 @@ from mercado.models import Patrimonio, PatrimonioMateriales, Trituradora, CurvaG
 
 # Create your views here.
 def misEquipos(request):
+    if request.method=="POST":
+        opcionSeleccionada=request.POST.get('equipo_id')
+        trituradoraVendida=get_object_or_404(Patrimonio, id=opcionSeleccionada)
+        usuario=request.user
+        usuario.dinero=usuario.dinero+trituradoraVendida.valorActual
+        usuario.save()
+        trituradoraVendida.delete()
+    else:
+        opcionSeleccionada=None
+
     if request.user.is_authenticated:
         currentUser=request.user
         patrimonio=list(Patrimonio.objects.filter(usuario_id=currentUser.id))

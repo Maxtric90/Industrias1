@@ -22,6 +22,7 @@
                         <td>Ab. Cierre</td>
                         <td>Valor Original</td>
                         <td>Valor Actual</td>
+                        <td>Vender</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,13 @@
                             <td>{{equipo.trituradora.aberturaCierre}}"</td>
                             <td>${{equipo.trituradora.precio}}</td>
                             <td>${{equipo.valorActual}}</td>
+                            <td>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{equipo.id}}" name="equipo_id">
+                                    <input type="submit" value="Vender">
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

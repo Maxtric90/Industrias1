@@ -1,0 +1,181 @@
+******Inicio ejecución layout usuario maxiortiz ******
+******Layout******
+Material: maxiortiz - Hematita - Dureza: duro  
+Primer Etapa: maxiortiz - 10x16- @1" - Manto; ninguno
+Segunda Etapa: None
+******************
+******Inicio trituración Etapa 1******
+******Control tamaños******
+Tamaño ingreso material: 10.0
+Tamaño entrada trituradora: 17
+Resultado tamaños: OK
+******Control caudales******
+Caudal ingreso material: 15.0tn/h
+Dureza: duro
+Caudal máximo trituradora: 11.0tn/h
+Resultado caudales: ERROR. Se pierde el material
+******Fin trituración Etapa 1******
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario maxiortiz ******
+******Inicio venta materiales usuario maxiortiz ******
+******Fin venta materiales usuario maxiortiz ******
+******Inicio amortización equipos usuario maxiortiz ******
+10x16:300.0->240.0
+******Fin amortización equipos usuario maxiortiz ******
+******Inicio ejecución layout usuario juantalenton ******
+******Layout******
+Material: juantalenton - Hematita - Dureza: duro  
+Primer Etapa: None
+Segunda Etapa: None
+******************
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario juantalenton ******
+******Inicio venta materiales usuario juantalenton ******
+Para el material 87(Hematita) con caudal 15.0
+Tamano: 9.99 :0.1
+Tamano: 10.0 :100.0
+El porcentaje entre 0.0 y 1.0 es 0.01001001001001001%.
+La ganacia es $0.048
+El porcentaje entre 1.0 y 2.0 es 0.01001001001001001%.
+La ganacia es $0.072
+El porcentaje entre 2.0 y 3.0 es 0.010010010010010008%.
+La ganacia es $0.12
+******Fin venta materiales usuario juantalenton ******
+******Inicio amortización equipos usuario juantalenton ******
+******Fin amortización equipos usuario juantalenton ******
+******Inicio ejecución layout usuario prueba ******
+******Layout******
+Material: prueba - Hematita - Dureza: duro  
+Primer Etapa: None
+Segunda Etapa: None
+******************
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario prueba ******
+******Inicio venta materiales usuario prueba ******
+Para el material 88(Hematita) con caudal 15.0
+Tamano: 9.99 :0.1
+Tamano: 10.0 :100.0
+El porcentaje entre 0.0 y 1.0 es 0.01001001001001001%.
+La ganacia es $0.048
+El porcentaje entre 1.0 y 2.0 es 0.01001001001001001%.
+La ganacia es $0.072
+El porcentaje entre 2.0 y 3.0 es 0.010010010010010008%.
+La ganacia es $0.12
+******Fin venta materiales usuario prueba ******
+******Inicio amortización equipos usuario prueba ******
+15x24:2998830.0->2998700.0
+******Fin amortización equipos usuario prueba ******
+****************************************************************************
+******Inicio ejecución layout usuario maxiortiz ******
+******Layout******
+Material: maxiortiz - Hematita - Dureza: duro  
+Primer Etapa: maxiortiz - 10x16- @1" - Manto; ninguno
+Segunda Etapa: None
+******************
+******Inicio trituración Etapa 1******
+******Control tamaños******
+Tamaño ingreso material: 10.0
+Tamaño entrada trituradora: 17
+Resultado tamaños: OK
+******Control caudales******
+Caudal ingreso material: 7.0tn/h
+Dureza: duro
+Caudal máximo trituradora: 11.0tn/h
+Resultado caudales: OK
+******Fin trituración Etapa 1******
+La ejecución ha sido exitosa
+******Fin de ejecucion layout usuario maxiortiz ******
+******Inicio venta materiales usuario maxiortiz ******
+Para el material 89(Hematita) con caudal 7.0
+Tamano: 0.0 :0.0
+Tamano: 0.25 :10.0
+Tamano: 0.5 :20.0
+Tamano: 0.725 :30.0
+Tamano: 0.8375 :40.0
+Tamano: 1.0 :50.0
+Tamano: 1.0675 :60.0
+Tamano: 1.1575 :70.0
+Tamano: 1.325 :80.0
+Tamano: 1.5 :90.0
+Tamano: 1.9 :100.0
+El porcentaje entre 0.0 y 1.0 es 50.0%.
+La ganacia es $112.0
+El porcentaje entre 1.0 y 2.0 es 50.0%.
+La ganacia es $168.0
+El porcentaje entre 2.0 y 3.0 es 0.0%.
+La ganacia es $0.0
+******Fin venta materiales usuario maxiortiz ******
+******Inicio amortización equipos usuario maxiortiz ******
+10x16:240.0->180.0
+******Fin amortización equipos usuario maxiortiz ******
+****************************************************************************
+******Inicio ejecución layout usuario juantalenton ******
+******Layout******
+Material: juantalenton - Hematita - Dureza: duro  
+Primer Etapa: None
+Segunda Etapa: None
+******************
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario juantalenton ******
+******Inicio venta materiales usuario juantalenton ******
+Para el material 90(Hematita) con caudal 7.0
+Tamano: 9.99 :0.1
+Tamano: 10.0 :100.0
+El porcentaje entre 0.0 y 1.0 es 0.01001001001001001%.
+La ganacia es $0.022000000000000002
+El porcentaje entre 1.0 y 2.0 es 0.01001001001001001%.
+La ganacia es $0.033
+El porcentaje entre 2.0 y 3.0 es 0.010010010010010008%.
+La ganacia es $0.055
+******Fin venta materiales usuario juantalenton ******
+******Inicio amortización equipos usuario juantalenton ******
+******Fin amortización equipos usuario juantalenton ******
+****************************************************************************
+******Inicio ejecución layout usuario prueba ******
+******Layout******
+Material: prueba - Hematita - Dureza: duro  
+Primer Etapa: None
+Segunda Etapa: None
+******************
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario prueba ******
+******Inicio venta materiales usuario prueba ******
+Para el material 91(Hematita) con caudal 7.0
+Tamano: 9.99 :0.1
+Tamano: 10.0 :100.0
+El porcentaje entre 0.0 y 1.0 es 0.01001001001001001%.
+La ganacia es $0.022000000000000002
+El porcentaje entre 1.0 y 2.0 es 0.01001001001001001%.
+La ganacia es $0.033
+El porcentaje entre 2.0 y 3.0 es 0.010010010010010008%.
+La ganacia es $0.055
+******Fin venta materiales usuario prueba ******
+******Inicio amortización equipos usuario prueba ******
+15x24:2998700.0->2998570.0
+******Fin amortización equipos usuario prueba ******
+****************************************************************************
+******Inicio ejecución layout usuario maxiortiz ******
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario maxiortiz ******
+******Inicio venta materiales usuario maxiortiz ******
+******Fin venta materiales usuario maxiortiz ******
+******Inicio amortización equipos usuario maxiortiz ******
+10x16:180.0->120.0
+******Fin amortización equipos usuario maxiortiz ******
+****************************************************************************
+******Inicio ejecución layout usuario juantalenton ******
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario juantalenton ******
+******Inicio venta materiales usuario juantalenton ******
+******Fin venta materiales usuario juantalenton ******
+******Inicio amortización equipos usuario juantalenton ******
+******Fin amortización equipos usuario juantalenton ******
+****************************************************************************
+******Inicio ejecución layout usuario prueba ******
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario prueba ******
+******Inicio venta materiales usuario prueba ******
+******Fin venta materiales usuario prueba ******
+******Inicio amortización equipos usuario prueba ******
+15x24:2998570.0->2998440.0
+******Fin amortización equipos usuario prueba ******
