@@ -1,80 +1,87 @@
 {% extends 'Industrias1App/base.html' %}
 
 {% load static %}
+{% load templatetags %}
 
 {% block content %}
 
     {% include "botoneraIzquierda/botoneraIzquierdaMiPlanta.html" %}
-
     {% if user.is_authenticated %}
-        <div class="containerCentral">
-            <h2>Layout de Planta</h2>
-            <form method="post">
-            {% csrf_token %}
-                <div id="layoutContainer">
-                    <div class="layoutCard">
-                        <div class="image">
-                            Material
+        {% cambiosAceptados as resultadoCambiosAceptados %}
+        {% if resultadoCambiosAceptados %}
+            <div class="containerCentral">
+                <h2>Layout de Planta</h2>
+                <form method="post">
+                {% csrf_token %}
+                    <div id="layoutContainer">
+                        <div class="layoutCard">
+                            <div class="image">
+                                Material
+                            </div>
+                            <div class="title">
+                                {{layout.material.material.nombre}}
+                            </div>
+                            <div class="change">
+                                Seleccione otro material:
+                                <br>
+                                <select name="materialInput">
+                                    {% for material in materiales %}
+                                    <option value="{{material.id}}">{{material.material.nombre}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                        <div class="title">
-                            {{layout.material.material.nombre}}
+                        <div class="layoutCard">
+                            <div class="image">
+                                1er Etapa
+                            </div>
+                            <div class="title">
+                                {{layout.primerEtapa.trituradora}}
+                            </div>
+                            <div class="change">
+                                Seleccione otro equipo:
+                                <br>
+                                <select name="primerEtapaInput">
+                                    <option value="0">Ninguna</option>
+                                    {% for trituradora in trituradoras %}
+                                    <option value="{{trituradora.id}}">{{trituradora.trituradora}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                        <div class="change">
-                            Seleccione otro material:
-                            <br>
-                            <select name="materialInput">
-                                {% for material in materiales %}
-                                <option value="{{material.id}}">{{material.material.nombre}}</option>
-                                {% endfor %}
-                            </select>
+                        <div class="layoutCard">
+                            <div class="image">
+                                2da Etapa
+                            </div>
+                            <div class="title">
+                                {{layout.segundaEtapa.trituradora}}
+                            </div>
+                            <div class="change">
+                                Seleccione otro equipo:
+                                <br>
+                                <select name="segundaEtapaInput">
+                                    <option value="0">Ninguna</option>
+                                    {% for trituradora in trituradoras %}
+                                    <option value="{{trituradora.id}}">{{trituradora.trituradora}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layoutCard">
-                        <div class="image">
-                            1er Etapa
-                        </div>
-                        <div class="title">
-                            {{layout.primerEtapa.trituradora}}
-                        </div>
-                        <div class="change">
-                            Seleccione otro equipo:
-                            <br>
-                            <select name="primerEtapaInput">
-                                <option value="0">Ninguna</option>
-                                {% for trituradora in trituradoras %}
-                                <option value="{{trituradora.id}}">{{trituradora.trituradora}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layoutCard">
-                        <div class="image">
-                            2da Etapa
-                        </div>
-                        <div class="title">
-                            {{layout.segundaEtapa.trituradora}}
-                        </div>
-                        <div class="change">
-                            Seleccione otro equipo:
-                            <br>
-                            <select name="segundaEtapaInput">
-                                <option value="0">Ninguna</option>
-                                {% for trituradora in trituradoras %}
-                                <option value="{{trituradora.id}}">{{trituradora.trituradora}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
 
-                </div>
-                <br>
-                <input type="submit" value="Actualizar Layout">
-            </form>
+                    </div>
+                    <br>
+                    <input type="submit" value="Actualizar Layout">
+                </form>
 
-            {% if mensaje != None %}
-            <p>{{mensaje}}</p>
-            {% endif %}
-        </div>
+                {% if mensaje != None %}
+                <p>{{mensaje}}</p>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="containerCentral">
+                <h4>No puede realizar ajustes. Ya pasó el la fecha límite del año</h4>
+            </div>
+        {% endif %}
     {% else %}
         <div class="containerCentral">
             <h4>Debe logearse para poder configurar su layout de planta</h4>

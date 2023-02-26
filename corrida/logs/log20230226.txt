@@ -24,3 +24,70 @@ La ejecución no tuvo éxito (por tamaños máximos o caudales)
 ******Inicio amortización equipos usuario prueba ******
 15x24:2998440.0->2998310.0
 ******Fin amortización equipos usuario prueba ******
+****************************************************************************
+******Inicio ejecución layout usuario maxiortiz ******
+******Layout******
+Material: maxiortiz - Hematita - Dureza: duro  
+Primer Etapa: None
+Segunda Etapa: None
+******************
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario maxiortiz ******
+******Inicio venta materiales usuario maxiortiz ******
+Para el material 92(Hematita) con caudal 10.0
+Tamano: 19.99 :0.1
+Tamano: 20.0 :100.0
+El porcentaje entre 0.0 y 1.0 es 0.005002501250625313%.
+La ganacia es $0.016
+El porcentaje entre 1.0 y 2.0 es 0.005002501250625313%.
+La ganacia es $0.024
+El porcentaje entre 2.0 y 3.0 es 0.0050025012506253125%.
+La ganacia es $0.04
+******Fin venta materiales usuario maxiortiz ******
+******Inicio amortización equipos usuario maxiortiz ******
+******Fin amortización equipos usuario maxiortiz ******
+****************************************************************************
+******Inicio ejecución layout usuario juantalenton ******
+******Layout******
+Material: juantalenton - Hematita - Dureza: duro  
+Primer Etapa: None
+Segunda Etapa: None
+******************
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario juantalenton ******
+******Inicio venta materiales usuario juantalenton ******
+Para el material 93(Hematita) con caudal 10.0
+Tamano: 19.99 :0.1
+Tamano: 20.0 :100.0
+El porcentaje entre 0.0 y 1.0 es 0.005002501250625313%.
+La ganacia es $0.016
+El porcentaje entre 1.0 y 2.0 es 0.005002501250625313%.
+La ganacia es $0.024
+El porcentaje entre 2.0 y 3.0 es 0.0050025012506253125%.
+La ganacia es $0.04
+******Fin venta materiales usuario juantalenton ******
+******Inicio amortización equipos usuario juantalenton ******
+******Fin amortización equipos usuario juantalenton ******
+****************************************************************************
+******Inicio ejecución layout usuario prueba ******
+******Layout******
+Material: prueba - Hematita - Dureza: duro  
+Primer Etapa: None
+Segunda Etapa: None
+******************
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario prueba ******
+******Inicio venta materiales usuario prueba ******
+Para el material 94(Hematita) con caudal 10.0
+Tamano: 19.99 :0.1
+Tamano: 20.0 :100.0
+El porcentaje entre 0.0 y 1.0 es 0.005002501250625313%.
+La ganacia es $0.016
+El porcentaje entre 1.0 y 2.0 es 0.005002501250625313%.
+La ganacia es $0.024
+El porcentaje entre 2.0 y 3.0 es 0.0050025012506253125%.
+La ganacia es $0.04
+******Fin venta materiales usuario prueba ******
+******Inicio amortización equipos usuario prueba ******
+15x24:2998310.0->2998180.0
+******Fin amortización equipos usuario prueba ******

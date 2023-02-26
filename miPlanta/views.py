@@ -3,13 +3,30 @@ from mercado.models import Patrimonio, PatrimonioMateriales, Trituradora, CurvaG
 
 # Create your views here.
 def misEquipos(request):
+    mensaje = ''
     if request.method=="POST":
-        opcionSeleccionada=request.POST.get('equipo_id')
-        trituradoraVendida=get_object_or_404(Patrimonio, id=opcionSeleccionada)
-        usuario=request.user
-        usuario.dinero=usuario.dinero+trituradoraVendida.valorActual
-        usuario.save()
-        trituradoraVendida.delete()
+        if request.user.is_authenticated:
+            currentUser=request.user
+            opcionSeleccionada=request.POST.get('equipo_id')
+            #Obtiene datos del layout
+            layoutUsuario=get_object_or_404(Layout, usuario__pk=currentUser.id)
+            primerEtapaId=None
+            segundaEtapaId=None
+            if layoutUsuario.primerEtapa != None:
+                primerEtapaId = layoutUsuario.primerEtapa.id
+            if layoutUsuario.segundaEtapa != None:
+                segundaEtapaId = layoutUsuario.segundaEtapa.id  
+            #Si está intentando vender una trituradora que está configurada en el layout cancela
+            if str(primerEtapaId) == str(opcionSeleccionada) or str(segundaEtapaId) == str(opcionSeleccionada):
+                opcionSeleccionada=None
+                mensaje='No puede vender una trituradora que está siendo utilizada en el Layout. Primero debe quitarla para luego venderla.'
+            else:
+                trituradoraVendida=get_object_or_404(Patrimonio, id=opcionSeleccionada)
+                currentUser.dinero=currentUser.dinero+trituradoraVendida.valorActual
+                currentUser.save()
+                trituradoraVendida.delete()
+        else:
+            opcionSeleccionada=None
     else:
         opcionSeleccionada=None
 
@@ -22,7 +39,7 @@ def misEquipos(request):
     else:
         patrimonio=None
 
-    return render(request, "miPlanta/misEquipos.html", {'patrimonio': patrimonio})
+    return render(request, "miPlanta/misEquipos.html", {'patrimonio': patrimonio, 'mensaje': mensaje})
 
 def layout(request):
     if request.user.is_authenticated:
