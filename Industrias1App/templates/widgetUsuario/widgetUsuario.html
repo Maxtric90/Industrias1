@@ -1,6 +1,14 @@
 {% load humanize %}
+{% load templatetags %}
 <div class="widgetUsuario">
     {% if request.user.is_authenticated %}
+        <p>
+            <strong>
+                <u>Corrida:</u><br>
+                Año: {% corridaAno %}<br>
+                Deadline:  {% corridaFechaLimite %}
+            </strong>
+        </p>
         <p><b>Usuario: {{request.user}}<br>
         Dinero: ${{request.user.dinero | intcomma}}<br>
         Tutor: {{request.user.tutor}}</b></p>

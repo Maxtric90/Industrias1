@@ -1,0 +1,26 @@
+****************************************************************************
+******Inicio ejecución layout usuario maxiortiz ******
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario maxiortiz ******
+******Inicio venta materiales usuario maxiortiz ******
+******Fin venta materiales usuario maxiortiz ******
+******Inicio amortización equipos usuario maxiortiz ******
+10x16:120.0->60.0
+******Fin amortización equipos usuario maxiortiz ******
+****************************************************************************
+******Inicio ejecución layout usuario juantalenton ******
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario juantalenton ******
+******Inicio venta materiales usuario juantalenton ******
+******Fin venta materiales usuario juantalenton ******
+******Inicio amortización equipos usuario juantalenton ******
+******Fin amortización equipos usuario juantalenton ******
+****************************************************************************
+******Inicio ejecución layout usuario prueba ******
+La ejecución no tuvo éxito (por tamaños máximos o caudales)
+******Fin de ejecucion layout usuario prueba ******
+******Inicio venta materiales usuario prueba ******
+******Fin venta materiales usuario prueba ******
+******Inicio amortización equipos usuario prueba ******
+15x24:2998440.0->2998310.0
+******Fin amortización equipos usuario prueba ******

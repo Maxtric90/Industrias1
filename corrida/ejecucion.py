@@ -1,7 +1,8 @@
 from mercado.models import CurvaGranulometricaMaterial, Demanda, Patrimonio, PatrimonioMateriales, Trituradora, CurvaGranulometrica, Material, Layout
+from .models import Corrida
 from Industrias1App.models import CustomUser
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from datetime import date
+from datetime import date, datetime, timedelta
 import csv
 
 #Esta función devuelve el porcentaje del material de una curva que es menor al tamaño indicado
@@ -216,6 +217,11 @@ def escrituraArchivo(texto, tipo):
     today = date.today()
     rutaArchivo= 'corrida/logs/'+ tipo + str(today.year) + str(today.month).zfill(2) + str(today.day).zfill(2) + '.txt'
     with open(rutaArchivo, 'a') as f:
-        print(texto)
         f.write(texto)
         f.write('\n')
+
+def adelantaCorrida():
+    corridaData=Corrida.objects.all()
+    corridaNueva = Corrida(ano = corridaData[0].ano + 1, fechaLimite=corridaData[0].fechaLimite + timedelta(days=14))
+    corridaData.delete()
+    corridaNueva.save()

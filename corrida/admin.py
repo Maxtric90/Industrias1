@@ -1,3 +1,7 @@
+from .models import Corrida
 from django.contrib import admin
 
-# Register your models here.
+class CorridaAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Corrida, CorridaAdmin)

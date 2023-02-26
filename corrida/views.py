@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from Industrias1App.models import CustomUser
 from mercado.models import Layout, PatrimonioMateriales, Material, Patrimonio
-from corrida.ejecucion import ejecutarLayout, ventaMaterial, agregarMaterialMenu, escrituraArchivo
+from corrida.ejecucion import ejecutarLayout, ventaMaterial, agregarMaterialMenu, escrituraArchivo, adelantaCorrida
 
 # Create your views here.
 def corrida(request):
@@ -47,6 +47,8 @@ def corrida(request):
                 escrituraArchivo(str(equipo.trituradora.modelo) + ':' + str(equipo.valorActual) + '->' + str(valorActualizado), 'log')
                 Patrimonio.objects.filter(pk=equipo.pk).update(valorActual=valorActualizado)
             escrituraArchivo("******Fin amortización equipos usuario " + str(usuario) + " ******", 'log')
+        #Actualiza los valores de la corrida
+        adelantaCorrida()
 
             
 
