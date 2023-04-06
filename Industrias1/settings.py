@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from Industrias1 import local_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-azj-t)@mk5*=1lrfw6uy))el_5l#9@$yvhrv)yn35=&jb$trfn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = local_settings.ALLOWED_HOSTS
 
 
 # Application definition
@@ -135,7 +136,4 @@ CRISPY_TEMPLATE_PACK='bootstrap4'
 
 AUTH_USER_MODEL= 'Industrias1App.CustomUser'
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
+print(ALLOWED_HOSTS)
