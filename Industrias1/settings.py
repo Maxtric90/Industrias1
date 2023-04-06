@@ -134,3 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK='bootstrap4'
 
 AUTH_USER_MODEL= 'Industrias1App.CustomUser'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
