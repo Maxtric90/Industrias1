@@ -6,3 +6,4 @@ class CustomUser(AbstractUser):
     tutor=models.CharField(max_length=30)
     dinero=models.IntegerField()
 
+    REQUIRED_FIELDS= ['tutor', 'dinero']
