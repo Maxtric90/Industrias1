@@ -215,7 +215,7 @@ def agregarMaterialMenu(material, caudal, tamano):
 
 def escrituraArchivo(texto, tipo):
     today = date.today()
-    rutaArchivo= 'corrida/logs/'+ tipo + str(today.year) + str(today.month).zfill(2) + str(today.day).zfill(2) + '.txt'
+    rutaArchivo= '/home/maxiortiz/Industrias1/corrida/logs/'+ tipo + str(today.year) + str(today.month).zfill(2) + str(today.day).zfill(2) + '.txt'
     with open(rutaArchivo, 'a') as f:
         f.write(texto)
         f.write('\n')
